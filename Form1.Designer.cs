@@ -49,7 +49,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btnguncelle = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.idtext = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.baslık.SuspendLayout();
@@ -255,13 +255,14 @@
             this.btnguncelle.TabIndex = 33;
             this.btnguncelle.Text = "güncelle";
             this.btnguncelle.UseVisualStyleBackColor = false;
+            this.btnguncelle.Click += new System.EventHandler(this.btnguncelle_Click);
             // 
-            // textBox1
+            // idtext
             // 
-            this.textBox1.Location = new System.Drawing.Point(293, 425);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 34;
+            this.idtext.Location = new System.Drawing.Point(293, 425);
+            this.idtext.Name = "idtext";
+            this.idtext.Size = new System.Drawing.Size(100, 22);
+            this.idtext.TabIndex = 34;
             // 
             // label9
             // 
@@ -280,7 +281,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(800, 515);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.idtext);
             this.Controls.Add(this.btnguncelle);
             this.Controls.Add(this.epostatext);
             this.Controls.Add(this.tarihtext);
@@ -334,7 +335,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnguncelle;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox idtext;
         private System.Windows.Forms.Label label9;
     }
 }

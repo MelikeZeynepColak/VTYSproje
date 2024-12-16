@@ -48,6 +48,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.btnguncelle = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.baslık.SuspendLayout();
             this.datagrid.SuspendLayout();
@@ -243,12 +246,42 @@
             this.label8.TabIndex = 19;
             this.label8.Text = "ad:";
             // 
+            // btnguncelle
+            // 
+            this.btnguncelle.BackColor = System.Drawing.Color.DarkKhaki;
+            this.btnguncelle.Location = new System.Drawing.Point(262, 367);
+            this.btnguncelle.Name = "btnguncelle";
+            this.btnguncelle.Size = new System.Drawing.Size(131, 48);
+            this.btnguncelle.TabIndex = 33;
+            this.btnguncelle.Text = "güncelle";
+            this.btnguncelle.UseVisualStyleBackColor = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(293, 425);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 22);
+            this.textBox1.TabIndex = 34;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label9.Location = new System.Drawing.Point(266, 429);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(23, 18);
+            this.label9.TabIndex = 35;
+            this.label9.Text = "id:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(800, 515);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnguncelle);
             this.Controls.Add(this.epostatext);
             this.Controls.Add(this.tarihtext);
             this.Controls.Add(this.telefontext);
@@ -300,6 +333,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnguncelle;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label9;
     }
 }
 

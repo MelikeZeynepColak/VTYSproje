@@ -32,6 +32,11 @@ namespace VTYSproje
 
         private void ekle_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrEmpty(adtext.Text)||string.IsNullOrEmpty(soyadtext.Text))
+            {
+                MessageBox.Show("Ad ve Soyad alanları boş bırakılamaz!","Hata",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
             baglanti.Open();
             NpgsqlCommand komut1 = new NpgsqlCommand("insert into kisibilgileri values (nextval('kisibilgileri_kisiid_seq'),@p1,@p2,@p3,@p4,@p5,@p6,@p7)", baglanti);
             komut1.Parameters.AddWithValue("@p1", adtext.Text);
@@ -72,9 +77,16 @@ namespace VTYSproje
         {
             if(idtext.Text!=null || idtext.Text.Length!=0)
             {
-                int id=int.Parse(idtext.Text);
+                if(!int.TryParse(idtext.Text, out int id))
+                {
+                    MessageBox.Show("Geçersiz id girdiniz..!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                NpgsqlCommand komut1 = new NpgsqlCommand("update kisibilgileri set ad=@p1, soyad=@p2 , eposta=@p3, telefon=@p4,adres= @p5,dogumtarihi=@p6,kategori=@p7 where kisiid=@p8", baglanti);
+
                 baglanti.Open();
-                NpgsqlCommand komut1 = new NpgsqlCommand("update kisibilgileri set ad=@p1, soyad=@p2 , eposta=@p3, telefon=@p4,adres= @p5,dogumtarihi=@p6,kategori=@p7 where kisiid=@p8)", baglanti);
+               
                 komut1.Parameters.AddWithValue("@p1", adtext.Text);
                 komut1.Parameters.AddWithValue("@p2", soyadtext.Text);
                 komut1.Parameters.AddWithValue("@p3", epostatext.Text);
@@ -113,6 +125,11 @@ namespace VTYSproje
             {
                 MessageBox.Show("Güncellemek istediğiniz kişinin id değerini giriniz..!", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

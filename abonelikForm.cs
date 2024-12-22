@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace VTYSproje
 {
-    public partial class egitmenlerForm : Form
+    public partial class abonelikForm : Form
     {
-        public egitmenlerForm()
+        public abonelikForm()
         {
             InitializeComponent();
         }
@@ -21,7 +21,7 @@ namespace VTYSproje
 
         private void btnlistele_Click(object sender, EventArgs e)
         {
-            string sorgu = "select * from egitmenbilgileri";
+            string sorgu = "select abonelikid,kisiid,sure,ucret(sure) from abonelikbilgileri order by abonelikid asc";
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -35,22 +35,22 @@ namespace VTYSproje
 
         private void güncellebtn_Click(object sender, EventArgs e)
         {
-            if (idtxt != null || idtxt.Text.Length != 0)
+            if(idtxt!=null|| idtxt.Text.Length!=0)
             {
                 if (!int.TryParse(idtxt.Text, out int id))
                 {
                     MessageBox.Show("Geçersiz id girdiniz..!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                NpgsqlCommand komut1 = new NpgsqlCommand("update egitmenbilgileri set uzmanlikalani=@p1 where egitmenid=@p2", baglanti);
+                NpgsqlCommand komut1 = new NpgsqlCommand("update abonelikbilgileri set sure=@p1 where abonelikid=@p2", baglanti);
 
                 baglanti.Open();
-                komut1.Parameters.AddWithValue("@p1", uzmantxt.Text);
+                komut1.Parameters.AddWithValue("@p1", int.Parse(suretext.Text));
                 komut1.Parameters.AddWithValue("@p2", id);
                 komut1.ExecuteNonQuery();
                 baglanti.Close();
                 MessageBox.Show("Kişi güncelleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                string sorgu = "select * from egitmenbilgileri";
+                string sorgu = "select abonelikid,kisiid,sure,ucret(sure) from abonelikbilgileri order by abonelikid asc";
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
@@ -59,7 +59,7 @@ namespace VTYSproje
             }
             else
             {
-                MessageBox.Show("Güncellemek istediğiniz eğitmenin eğitmen id değerini giriniz..!", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Güncellemek istediğiniz abonenin abonelik id değerini giriniz..!", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
         }

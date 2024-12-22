@@ -52,6 +52,7 @@
             this.idtext = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnsil = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.baslık.SuspendLayout();
             this.datagrid.SuspendLayout();
@@ -63,7 +64,7 @@
             this.btnlistele.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnlistele.Location = new System.Drawing.Point(645, 311);
             this.btnlistele.Name = "btnlistele";
-            this.btnlistele.Size = new System.Drawing.Size(143, 49);
+            this.btnlistele.Size = new System.Drawing.Size(143, 50);
             this.btnlistele.TabIndex = 1;
             this.btnlistele.Text = "Tümünü Listele";
             this.btnlistele.UseVisualStyleBackColor = false;
@@ -117,7 +118,7 @@
             // 
             this.ekle.BackColor = System.Drawing.Color.MistyRose;
             this.ekle.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.ekle.Location = new System.Drawing.Point(262, 308);
+            this.ekle.Location = new System.Drawing.Point(244, 312);
             this.ekle.Name = "ekle";
             this.ekle.Size = new System.Drawing.Size(131, 49);
             this.ekle.TabIndex = 6;
@@ -153,9 +154,9 @@
             // 
             this.kategoritext.FormattingEnabled = true;
             this.kategoritext.Items.AddRange(new object[] {
-            "",
             "abone",
-            "eğitmen"});
+            "eğitmen",
+            "ziyaretçi"});
             this.kategoritext.Location = new System.Drawing.Point(115, 475);
             this.kategoritext.Name = "kategoritext";
             this.kategoritext.Size = new System.Drawing.Size(121, 24);
@@ -255,9 +256,9 @@
             // btnguncelle
             // 
             this.btnguncelle.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnguncelle.Location = new System.Drawing.Point(262, 367);
+            this.btnguncelle.Location = new System.Drawing.Point(381, 312);
             this.btnguncelle.Name = "btnguncelle";
-            this.btnguncelle.Size = new System.Drawing.Size(131, 48);
+            this.btnguncelle.Size = new System.Drawing.Size(131, 49);
             this.btnguncelle.TabIndex = 33;
             this.btnguncelle.Text = "güncelle";
             this.btnguncelle.UseVisualStyleBackColor = false;
@@ -265,7 +266,7 @@
             // 
             // idtext
             // 
-            this.idtext.Location = new System.Drawing.Point(293, 425);
+            this.idtext.Location = new System.Drawing.Point(469, 376);
             this.idtext.Name = "idtext";
             this.idtext.Size = new System.Drawing.Size(100, 22);
             this.idtext.TabIndex = 34;
@@ -274,7 +275,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label9.Location = new System.Drawing.Point(266, 429);
+            this.label9.Location = new System.Drawing.Point(440, 376);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(23, 18);
             this.label9.TabIndex = 35;
@@ -291,12 +292,24 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // btnsil
+            // 
+            this.btnsil.BackColor = System.Drawing.Color.MediumOrchid;
+            this.btnsil.Location = new System.Drawing.Point(518, 312);
+            this.btnsil.Name = "btnsil";
+            this.btnsil.Size = new System.Drawing.Size(121, 49);
+            this.btnsil.TabIndex = 37;
+            this.btnsil.Text = "Sil";
+            this.btnsil.UseVisualStyleBackColor = false;
+            this.btnsil.Click += new System.EventHandler(this.btnsil_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(800, 515);
+            this.Controls.Add(this.btnsil);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.idtext);
@@ -357,6 +370,7 @@
         private System.Windows.Forms.TextBox idtext;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnsil;
     }
 }
 

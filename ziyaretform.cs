@@ -11,22 +11,13 @@ using System.Windows.Forms;
 
 namespace VTYSproje
 {
-    public partial class egitmenlerForm : Form
+    public partial class ziyaretform : Form
     {
-        public egitmenlerForm()
+        public ziyaretform()
         {
             InitializeComponent();
         }
         NpgsqlConnection baglanti = new NpgsqlConnection("server=localhost; port=5432; Database=proje; user ID=postgres; password=melike04");
-
-        private void btnlistele_Click(object sender, EventArgs e)
-        {
-            string sorgu = "select * from egitmenbilgileri";
-            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0];
-        }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -42,15 +33,15 @@ namespace VTYSproje
                     MessageBox.Show("Geçersiz id girdiniz..!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                NpgsqlCommand komut1 = new NpgsqlCommand("update egitmenbilgileri set uzmanlikalani=@p1 where egitmenid=@p2", baglanti);
+                NpgsqlCommand komut1 = new NpgsqlCommand("update ziyaretkayitlari set giristarihi=@p1 where ziyaretid=@p2", baglanti);
 
                 baglanti.Open();
-                komut1.Parameters.AddWithValue("@p1", uzmantxt.Text);
+                komut1.Parameters.AddWithValue("@p1", int.Parse(giristarihitext.Text));
                 komut1.Parameters.AddWithValue("@p2", id);
                 komut1.ExecuteNonQuery();
                 baglanti.Close();
-                MessageBox.Show("Kişi güncelleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                string sorgu = "select * from egitmenbilgileri";
+                MessageBox.Show("Ziyaretçi güncelleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string sorgu = "select * from ziyaretkayitlari order by ziyaretid asc";
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
@@ -59,9 +50,18 @@ namespace VTYSproje
             }
             else
             {
-                MessageBox.Show("Güncellemek istediğiniz eğitmenin eğitmen id değerini giriniz..!", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Güncellemek istediğiniz ziyaretçinin ziyaret id değerini giriniz..!", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
+        }
+
+        private void btnlistele_Click(object sender, EventArgs e)
+        {
+            string sorgu = "select * from ziyaretkayitlari order by ziyaretid asc";
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0];
         }
     }
 }

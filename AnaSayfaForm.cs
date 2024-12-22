@@ -30,5 +30,68 @@ namespace VTYSproje
             egitmenler.Show();
 
         }
+
+        private void abonelerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            abonelikForm aboneler = new abonelikForm();
+            aboneler.Show();
+        }
+
+        private void beslenmeProgramlarıToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            beslenmeprogramForm program = new beslenmeprogramForm();
+            program.Show();
+        }
+
+        private void bireyselAntrenmanlarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grupDersleriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void etkinlikBilgileriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void katılımcılarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kampanyaBilgileriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ödemeBilgileriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void şikayetVeÖnerilerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ekipmanBilgileriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kullanımKayıtlarıToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ziyaretçilerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ziyaretform ziyaret = new ziyaretform();
+            ziyaret.Show();
+        }
     }
 }

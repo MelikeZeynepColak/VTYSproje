@@ -155,5 +155,30 @@ namespace VTYSproje
             kategoritext.Text = satır.Cells[7].Value.ToString();
 
         }
+
+        private void btnsil_Click(object sender, EventArgs e)
+        {
+            baglanti.Open();
+            NpgsqlCommand komut2 = new NpgsqlCommand(" Delete from kisibilgileri where kisiid=@p1", baglanti);
+            if(idtext!=null)
+            {
+                komut2.Parameters.AddWithValue("@p1", int.Parse(idtext.Text));
+                komut2.ExecuteNonQuery();
+                baglanti.Close();
+                MessageBox.Show("Kişi Silindi..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                string sorgu = "select * from kisibilgileri order by kisiid asc";
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                dataGridView1.DataSource = ds.Tables[0];
+            }
+            else
+            {
+                MessageBox.Show("Lütfen geçerli id giriniz", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
+
+        }
     }
 }

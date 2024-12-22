@@ -23,5 +23,12 @@ namespace VTYSproje
             form1.ShowDialog();
 
         }
+
+        private void eğitmenlerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            egitmenlerForm egitmenler = new egitmenlerForm();
+            egitmenler.Show();
+
+        }
     }
 }

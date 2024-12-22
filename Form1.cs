@@ -6,9 +6,11 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace VTYSproje
 {
@@ -18,6 +20,7 @@ namespace VTYSproje
         {
             InitializeComponent();
         }
+        int index;
         NpgsqlConnection baglanti = new NpgsqlConnection("server=localhost; port=5432; Database=proje; user ID=postgres; password=melike04");
         private void btnlistele_Click(object sender, EventArgs e)
         {
@@ -75,8 +78,10 @@ namespace VTYSproje
 
         private void btnguncelle_Click(object sender, EventArgs e)
         {
+
             if(idtext.Text!=null || idtext.Text.Length!=0)
             {
+                
                 if(!int.TryParse(idtext.Text, out int id))
                 {
                     MessageBox.Show("Geçersiz id girdiniz..!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -129,7 +134,26 @@ namespace VTYSproje
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            index = e.RowIndex;
+
+            
+            DataGridViewRow satır = dataGridView1.Rows[index];
+           
+
+            idtext.Text = satır.Cells[0].Value.ToString();
+            adtext.Text = satır.Cells[1].Value.ToString();
+            soyadtext.Text = satır.Cells[2].Value.ToString();
+            epostatext.Text = satır.Cells[3].Value.ToString();
+            telefontext.Text = satır.Cells[4].Value.ToString();
+            adrestext.Text = satır.Cells[5].Value.ToString();
+            tarihtext.Text =satır.Cells[6].Value.ToString();
+            kategoritext.Text = satır.Cells[7].Value.ToString();
+
         }
     }
 }

@@ -33,13 +33,14 @@
             this.eğitmenlerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abonelerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ziyaretçilerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tümüToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dersBilgileriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bireyselAntrenmanlarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grupDersleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.etkinliklerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.kampanylarVeÖdemelerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.etkinlikBilgileriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.katılımcılarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kampanylarVeÖdemelerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kampanyaBilgileriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ödemeBilgileriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diğerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +49,6 @@
             this.ekimpanlarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ekipmanBilgileriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kullanımKayıtlarıToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tümüToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,6 +92,7 @@
             this.eğitmenlerToolStripMenuItem.Name = "eğitmenlerToolStripMenuItem";
             this.eğitmenlerToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.eğitmenlerToolStripMenuItem.Text = "Eğitmenler";
+            this.eğitmenlerToolStripMenuItem.Click += new System.EventHandler(this.eğitmenlerToolStripMenuItem_Click);
             // 
             // abonelerToolStripMenuItem
             // 
@@ -106,6 +107,14 @@
             this.ziyaretçilerToolStripMenuItem.Name = "ziyaretçilerToolStripMenuItem";
             this.ziyaretçilerToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.ziyaretçilerToolStripMenuItem.Text = "Ziyaretçiler";
+            // 
+            // tümüToolStripMenuItem
+            // 
+            this.tümüToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
+            this.tümüToolStripMenuItem.Name = "tümüToolStripMenuItem";
+            this.tümüToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.tümüToolStripMenuItem.Text = "Tümü";
+            this.tümüToolStripMenuItem.Click += new System.EventHandler(this.tümüToolStripMenuItem_Click);
             // 
             // dersBilgileriToolStripMenuItem
             // 
@@ -141,6 +150,20 @@
             this.etkinliklerToolStripMenuItem.Size = new System.Drawing.Size(96, 27);
             this.etkinliklerToolStripMenuItem.Text = "Etkinlikler";
             // 
+            // etkinlikBilgileriToolStripMenuItem
+            // 
+            this.etkinlikBilgileriToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
+            this.etkinlikBilgileriToolStripMenuItem.Name = "etkinlikBilgileriToolStripMenuItem";
+            this.etkinlikBilgileriToolStripMenuItem.Size = new System.Drawing.Size(207, 28);
+            this.etkinlikBilgileriToolStripMenuItem.Text = "Etkinlik Bilgileri";
+            // 
+            // katılımcılarToolStripMenuItem
+            // 
+            this.katılımcılarToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
+            this.katılımcılarToolStripMenuItem.Name = "katılımcılarToolStripMenuItem";
+            this.katılımcılarToolStripMenuItem.Size = new System.Drawing.Size(207, 28);
+            this.katılımcılarToolStripMenuItem.Text = "Katılımcılar";
+            // 
             // kampanylarVeÖdemelerToolStripMenuItem
             // 
             this.kampanylarVeÖdemelerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -150,20 +173,6 @@
             this.kampanylarVeÖdemelerToolStripMenuItem.Name = "kampanylarVeÖdemelerToolStripMenuItem";
             this.kampanylarVeÖdemelerToolStripMenuItem.Size = new System.Drawing.Size(216, 27);
             this.kampanylarVeÖdemelerToolStripMenuItem.Text = "Kampanylar ve Ödemeler";
-            // 
-            // etkinlikBilgileriToolStripMenuItem
-            // 
-            this.etkinlikBilgileriToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
-            this.etkinlikBilgileriToolStripMenuItem.Name = "etkinlikBilgileriToolStripMenuItem";
-            this.etkinlikBilgileriToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
-            this.etkinlikBilgileriToolStripMenuItem.Text = "Etkinlik Bilgileri";
-            // 
-            // katılımcılarToolStripMenuItem
-            // 
-            this.katılımcılarToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
-            this.katılımcılarToolStripMenuItem.Name = "katılımcılarToolStripMenuItem";
-            this.katılımcılarToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
-            this.katılımcılarToolStripMenuItem.Text = "Katılımcılar";
             // 
             // kampanyaBilgileriToolStripMenuItem
             // 
@@ -226,14 +235,6 @@
             this.kullanımKayıtlarıToolStripMenuItem.Name = "kullanımKayıtlarıToolStripMenuItem";
             this.kullanımKayıtlarıToolStripMenuItem.Size = new System.Drawing.Size(225, 28);
             this.kullanımKayıtlarıToolStripMenuItem.Text = "Kullanım Kayıtları";
-            // 
-            // tümüToolStripMenuItem
-            // 
-            this.tümüToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
-            this.tümüToolStripMenuItem.Name = "tümüToolStripMenuItem";
-            this.tümüToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
-            this.tümüToolStripMenuItem.Text = "Tümü";
-            this.tümüToolStripMenuItem.Click += new System.EventHandler(this.tümüToolStripMenuItem_Click);
             // 
             // AnaSayfaForm
             // 

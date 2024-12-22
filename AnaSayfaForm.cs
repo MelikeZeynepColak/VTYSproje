@@ -45,7 +45,8 @@ namespace VTYSproje
 
         private void bireyselAntrenmanlarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            bireyselantrenman bireyselantrenman = new bireyselantrenman();
+            bireyselantrenman.Show();
         }
 
         private void grupDersleriToolStripMenuItem_Click(object sender, EventArgs e)

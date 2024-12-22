@@ -113,6 +113,12 @@
     <Compile Include="beslenmeprogramForm.Designer.cs">
       <DependentUpon>beslenmeprogramForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="bireyselantrenman.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="bireyselantrenman.Designer.cs">
+      <DependentUpon>bireyselantrenman.cs</DependentUpon>
+    </Compile>
     <Compile Include="egitmenlerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="beslenmeprogramForm.resx">
       <DependentUpon>beslenmeprogramForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bireyselantrenman.resx">
+      <DependentUpon>bireyselantrenman.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="egitmenlerForm.resx">
       <DependentUpon>egitmenlerForm.cs</DependentUpon>

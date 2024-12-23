@@ -125,6 +125,18 @@
     <Compile Include="egitmenlerForm.Designer.cs">
       <DependentUpon>egitmenlerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="etkinlikbilgileri.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="etkinlikbilgileri.Designer.cs">
+      <DependentUpon>etkinlikbilgileri.cs</DependentUpon>
+    </Compile>
+    <Compile Include="etkinlikKatilimciar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="etkinlikKatilimciar.Designer.cs">
+      <DependentUpon>etkinlikKatilimciar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +148,12 @@
     </Compile>
     <Compile Include="grupDersleriForm.Designer.cs">
       <DependentUpon>grupDersleriForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="odemeBilgileri.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="odemeBilgileri.Designer.cs">
+      <DependentUpon>odemeBilgileri.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -160,11 +178,20 @@
     <EmbeddedResource Include="egitmenlerForm.resx">
       <DependentUpon>egitmenlerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="etkinlikbilgileri.resx">
+      <DependentUpon>etkinlikbilgileri.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="etkinlikKatilimciar.resx">
+      <DependentUpon>etkinlikKatilimciar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="grupDersleriForm.resx">
       <DependentUpon>grupDersleriForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="odemeBilgileri.resx">
+      <DependentUpon>odemeBilgileri.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

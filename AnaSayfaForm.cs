@@ -57,22 +57,19 @@ namespace VTYSproje
 
         private void etkinlikBilgileriToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            etkinlikbilgileri etkinlikbilgileri = new etkinlikbilgileri();
+            etkinlikbilgileri.Show();
         }
 
         private void katılımcılarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            etkinlikKatilimciar etkinlikKatilimciar = new etkinlikKatilimciar();
+            etkinlikKatilimciar.Show();
         }
-
-        private void kampanyaBilgileriToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ödemeBilgileriToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            odemeBilgileri odemeBilgileri = new odemeBilgileri();
+            odemeBilgileri.Show();
         }
 
         private void şikayetVeÖnerilerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -94,6 +91,11 @@ namespace VTYSproje
         {
             ziyaretform ziyaret = new ziyaretform();
             ziyaret.Show();
+        }
+
+        private void toplamGelirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

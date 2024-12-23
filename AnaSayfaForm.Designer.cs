@@ -41,7 +41,6 @@
             this.etkinlikBilgileriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.katılımcılarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kampanylarVeÖdemelerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.kampanyaBilgileriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ödemeBilgileriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diğerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.şikayetVeÖnerilerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,10 +49,11 @@
             this.ekipmanBilgileriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kullanımKayıtlarıToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.toplamGelirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -99,7 +99,7 @@
             this.eğitmenlerToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
             this.eğitmenlerToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.eğitmenlerToolStripMenuItem.Name = "eğitmenlerToolStripMenuItem";
-            this.eğitmenlerToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.eğitmenlerToolStripMenuItem.Size = new System.Drawing.Size(177, 28);
             this.eğitmenlerToolStripMenuItem.Text = "Eğitmenler";
             this.eğitmenlerToolStripMenuItem.Click += new System.EventHandler(this.eğitmenlerToolStripMenuItem_Click);
             // 
@@ -107,7 +107,7 @@
             // 
             this.abonelerToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
             this.abonelerToolStripMenuItem.Name = "abonelerToolStripMenuItem";
-            this.abonelerToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.abonelerToolStripMenuItem.Size = new System.Drawing.Size(177, 28);
             this.abonelerToolStripMenuItem.Text = "Aboneler";
             this.abonelerToolStripMenuItem.Click += new System.EventHandler(this.abonelerToolStripMenuItem_Click);
             // 
@@ -115,7 +115,7 @@
             // 
             this.ziyaretçilerToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
             this.ziyaretçilerToolStripMenuItem.Name = "ziyaretçilerToolStripMenuItem";
-            this.ziyaretçilerToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.ziyaretçilerToolStripMenuItem.Size = new System.Drawing.Size(177, 28);
             this.ziyaretçilerToolStripMenuItem.Text = "Ziyaretçiler";
             this.ziyaretçilerToolStripMenuItem.Click += new System.EventHandler(this.ziyaretçilerToolStripMenuItem_Click);
             // 
@@ -123,7 +123,7 @@
             // 
             this.tümüToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
             this.tümüToolStripMenuItem.Name = "tümüToolStripMenuItem";
-            this.tümüToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.tümüToolStripMenuItem.Size = new System.Drawing.Size(177, 28);
             this.tümüToolStripMenuItem.Text = "Tümü";
             this.tümüToolStripMenuItem.Click += new System.EventHandler(this.tümüToolStripMenuItem_Click);
             // 
@@ -167,7 +167,7 @@
             // 
             this.etkinlikBilgileriToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
             this.etkinlikBilgileriToolStripMenuItem.Name = "etkinlikBilgileriToolStripMenuItem";
-            this.etkinlikBilgileriToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.etkinlikBilgileriToolStripMenuItem.Size = new System.Drawing.Size(207, 28);
             this.etkinlikBilgileriToolStripMenuItem.Text = "Etkinlik Bilgileri";
             this.etkinlikBilgileriToolStripMenuItem.Click += new System.EventHandler(this.etkinlikBilgileriToolStripMenuItem_Click);
             // 
@@ -175,33 +175,25 @@
             // 
             this.katılımcılarToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
             this.katılımcılarToolStripMenuItem.Name = "katılımcılarToolStripMenuItem";
-            this.katılımcılarToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.katılımcılarToolStripMenuItem.Size = new System.Drawing.Size(207, 28);
             this.katılımcılarToolStripMenuItem.Text = "Katılımcılar";
             this.katılımcılarToolStripMenuItem.Click += new System.EventHandler(this.katılımcılarToolStripMenuItem_Click);
             // 
             // kampanylarVeÖdemelerToolStripMenuItem
             // 
             this.kampanylarVeÖdemelerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.kampanyaBilgileriToolStripMenuItem,
-            this.ödemeBilgileriToolStripMenuItem});
+            this.ödemeBilgileriToolStripMenuItem,
+            this.toplamGelirToolStripMenuItem});
             this.kampanylarVeÖdemelerToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.kampanylarVeÖdemelerToolStripMenuItem.Name = "kampanylarVeÖdemelerToolStripMenuItem";
-            this.kampanylarVeÖdemelerToolStripMenuItem.Size = new System.Drawing.Size(216, 57);
-            this.kampanylarVeÖdemelerToolStripMenuItem.Text = "Kampanylar ve Ödemeler";
-            // 
-            // kampanyaBilgileriToolStripMenuItem
-            // 
-            this.kampanyaBilgileriToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
-            this.kampanyaBilgileriToolStripMenuItem.Name = "kampanyaBilgileriToolStripMenuItem";
-            this.kampanyaBilgileriToolStripMenuItem.Size = new System.Drawing.Size(234, 28);
-            this.kampanyaBilgileriToolStripMenuItem.Text = "Kampanya Bilgileri";
-            this.kampanyaBilgileriToolStripMenuItem.Click += new System.EventHandler(this.kampanyaBilgileriToolStripMenuItem_Click);
+            this.kampanylarVeÖdemelerToolStripMenuItem.Size = new System.Drawing.Size(104, 57);
+            this.kampanylarVeÖdemelerToolStripMenuItem.Text = " Ödemeler";
             // 
             // ödemeBilgileriToolStripMenuItem
             // 
             this.ödemeBilgileriToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
             this.ödemeBilgileriToolStripMenuItem.Name = "ödemeBilgileriToolStripMenuItem";
-            this.ödemeBilgileriToolStripMenuItem.Size = new System.Drawing.Size(234, 28);
+            this.ödemeBilgileriToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.ödemeBilgileriToolStripMenuItem.Text = "Ödeme Bilgileri";
             this.ödemeBilgileriToolStripMenuItem.Click += new System.EventHandler(this.ödemeBilgileriToolStripMenuItem_Click);
             // 
@@ -265,18 +257,6 @@
             this.panel1.Size = new System.Drawing.Size(337, 112);
             this.panel1.TabIndex = 2;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(155, 140);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 31);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Merhaba!";
-            // 
             // textBox1
             // 
             this.textBox1.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
@@ -293,6 +273,18 @@
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "Spor salonu veritabanı sistemine hoş geldiniz.. Yukarıdaki menüden istediğiniz iş" +
     "lemleri gerçekleştirebilirsiniz.";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label1.Location = new System.Drawing.Point(155, 140);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(116, 31);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Merhaba!";
             // 
             // panel2
             // 
@@ -314,6 +306,14 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            // 
+            // toplamGelirToolStripMenuItem
+            // 
+            this.toplamGelirToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
+            this.toplamGelirToolStripMenuItem.Name = "toplamGelirToolStripMenuItem";
+            this.toplamGelirToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.toplamGelirToolStripMenuItem.Text = "Toplam Gelir";
+            this.toplamGelirToolStripMenuItem.Click += new System.EventHandler(this.toplamGelirToolStripMenuItem_Click);
             // 
             // AnaSayfaForm
             // 
@@ -355,7 +355,6 @@
         private System.Windows.Forms.ToolStripMenuItem etkinlikBilgileriToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem katılımcılarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kampanylarVeÖdemelerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem kampanyaBilgileriToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ödemeBilgileriToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem diğerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem şikayetVeÖnerilerToolStripMenuItem;
@@ -369,5 +368,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ToolStripMenuItem toplamGelirToolStripMenuItem;
     }
 }

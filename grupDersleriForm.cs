@@ -98,5 +98,39 @@ namespace VTYSproje
                 MessageBox.Show("Lütfen geçerli id giriniz", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (idtxt != null || idtxt.Text.Length != 0 || tarihtext != null || saattext != null || egitmenid != null|| string.IsNullOrEmpty(dersaditxt.Text))
+            {
+                if (!int.TryParse(idtxt.Text, out int id))
+                {
+                    MessageBox.Show("Geçersiz id girdiniz..!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                NpgsqlCommand komut1 = new NpgsqlCommand("update grupdersibilgileri set dersadi=@p5, tarih=@p1, saat=@p2,egitmenid=@p3 where grupdersiid=@p4", baglanti);
+
+                baglanti.Open();
+                komut1.Parameters.AddWithValue("@p1", DateTime.Parse(tarihtext.Text));
+                komut1.Parameters.AddWithValue("@p2", DateTime.Parse(saattext.Text));
+                komut1.Parameters.AddWithValue("@p3", int.Parse(egitmenid.Text));
+                komut1.Parameters.AddWithValue("@p5", dersaditxt.Text);
+                komut1.Parameters.AddWithValue("@p4", id);
+                komut1.ExecuteNonQuery();
+                baglanti.Close();
+                MessageBox.Show("Grup dersi güncelleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string sorgu = "select * from grupdersibilgileri order by grupdersiid asc";
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                dataGridView1.DataSource = ds.Tables[0];
+
+            }
+            else
+            {
+                MessageBox.Show("Güncellemek istediğiniz dersin ders id değerini giriniz..!", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
     }
 }

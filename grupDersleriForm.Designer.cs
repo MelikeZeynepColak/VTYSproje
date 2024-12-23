@@ -33,7 +33,6 @@
             this.btnlistele = new System.Windows.Forms.Button();
             this.baslık = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
             this.eklebtn = new System.Windows.Forms.Button();
             this.egitmenid = new System.Windows.Forms.TextBox();
@@ -47,6 +46,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dersaditxt = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.datagrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.baslık.SuspendLayout();
@@ -106,17 +106,6 @@
             this.label1.Size = new System.Drawing.Size(145, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "Grup Dersleri Bilgileri";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::VTYSproje.Properties.Resources.previous_icon_icons_com_69318;
-            this.pictureBox1.Location = new System.Drawing.Point(729, 459);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(59, 50);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 71;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // button2
             // 
@@ -183,6 +172,7 @@
             this.button1.TabIndex = 96;
             this.button1.Text = "Güncelle";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // idtxt
             // 
@@ -234,6 +224,17 @@
             this.dersaditxt.Name = "dersaditxt";
             this.dersaditxt.Size = new System.Drawing.Size(104, 22);
             this.dersaditxt.TabIndex = 104;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::VTYSproje.Properties.Resources.previous_icon_icons_com_69318;
+            this.pictureBox1.Location = new System.Drawing.Point(729, 459);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(59, 50);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 71;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // grupDersleriForm
             // 

@@ -125,6 +125,18 @@
     <Compile Include="egitmenlerForm.Designer.cs">
       <DependentUpon>egitmenlerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ekipmanbilgileri.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ekipmanbilgileri.Designer.cs">
+      <DependentUpon>ekipmanbilgileri.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ekipmanlar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ekipmanlar.Designer.cs">
+      <DependentUpon>ekipmanlar.cs</DependentUpon>
+    </Compile>
     <Compile Include="etkinlikbilgileri.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,6 +189,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="egitmenlerForm.resx">
       <DependentUpon>egitmenlerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ekipmanbilgileri.resx">
+      <DependentUpon>ekipmanbilgileri.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ekipmanlar.resx">
+      <DependentUpon>ekipmanlar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="etkinlikbilgileri.resx">
       <DependentUpon>etkinlikbilgileri.cs</DependentUpon>

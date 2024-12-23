@@ -21,11 +21,22 @@ namespace VTYSproje
 
         private void btnlistele_Click(object sender, EventArgs e)
         {
-            string sorgu = "select abonelikid,kisiid,sure,ucret(sure) from abonelikbilgileri order by abonelikid asc";
-            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0];
+            try
+            {
+                string sorgu = "select abonelikid,kisiid,sure,ucret(sure) from abonelikbilgileri order by abonelikid asc";
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                dataGridView1.DataSource = ds.Tables[0];
+            }
+            catch (NpgsqlException sqlEx)
+            {
+                MessageBox.Show($"SQL Hatası: {sqlEx.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -35,32 +46,45 @@ namespace VTYSproje
 
         private void güncellebtn_Click(object sender, EventArgs e)
         {
-            if(idtxt!=null|| idtxt.Text.Length!=0)
+            try
             {
-                if (!int.TryParse(idtxt.Text, out int id))
+                if (string.IsNullOrEmpty(idtxt.Text) || string.IsNullOrEmpty(suretext.Text))
                 {
-                    MessageBox.Show("Geçersiz id girdiniz..!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Abonelik ID ve süre alanları boş bırakılamaz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                NpgsqlCommand komut1 = new NpgsqlCommand("update abonelikbilgileri set sure=@p1 where abonelikid=@p2", baglanti);
+
+                if (!int.TryParse(idtxt.Text, out int id))
+                {
+                    MessageBox.Show("Geçersiz Abonelik ID girdiniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 baglanti.Open();
+                NpgsqlCommand komut1 = new NpgsqlCommand("update abonelikbilgileri set sure=@p1 where abonelikid=@p2", baglanti);
                 komut1.Parameters.AddWithValue("@p1", int.Parse(suretext.Text));
                 komut1.Parameters.AddWithValue("@p2", id);
                 komut1.ExecuteNonQuery();
-                baglanti.Close();
-                MessageBox.Show("Kişi güncelleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                string sorgu = "select abonelikid,kisiid,sure,ucret(sure) from abonelikbilgileri order by abonelikid asc";
-                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                dataGridView1.DataSource = ds.Tables[0];
 
+                MessageBox.Show("Abonelik bilgisi güncelleme başarılı.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Listeyi güncelle
+                btnlistele_Click(sender, e);
             }
-            else
+            catch (NpgsqlException sqlEx)
             {
-                MessageBox.Show("Güncellemek istediğiniz abonenin abonelik id değerini giriniz..!", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                MessageBox.Show($"SQL Hatası: {sqlEx.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Beklenmeyen bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (baglanti.State == ConnectionState.Open)
+                {
+                    baglanti.Close();
+                }
             }
         }
     }

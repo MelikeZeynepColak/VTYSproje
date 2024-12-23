@@ -53,7 +53,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.toplamGelirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -182,8 +181,7 @@
             // kampanylarVeÖdemelerToolStripMenuItem
             // 
             this.kampanylarVeÖdemelerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ödemeBilgileriToolStripMenuItem,
-            this.toplamGelirToolStripMenuItem});
+            this.ödemeBilgileriToolStripMenuItem});
             this.kampanylarVeÖdemelerToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.kampanylarVeÖdemelerToolStripMenuItem.Name = "kampanylarVeÖdemelerToolStripMenuItem";
             this.kampanylarVeÖdemelerToolStripMenuItem.Size = new System.Drawing.Size(104, 57);
@@ -307,14 +305,6 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // toplamGelirToolStripMenuItem
-            // 
-            this.toplamGelirToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
-            this.toplamGelirToolStripMenuItem.Name = "toplamGelirToolStripMenuItem";
-            this.toplamGelirToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
-            this.toplamGelirToolStripMenuItem.Text = "Toplam Gelir";
-            this.toplamGelirToolStripMenuItem.Click += new System.EventHandler(this.toplamGelirToolStripMenuItem_Click);
-            // 
             // AnaSayfaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -368,6 +358,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ToolStripMenuItem toplamGelirToolStripMenuItem;
     }
 }

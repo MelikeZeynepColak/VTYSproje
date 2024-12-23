@@ -65,7 +65,7 @@ namespace VTYSproje
 
         private void güncellebtn_Click(object sender, EventArgs e)
         {
-            if (idtxt != null || idtxt.Text.Length != 0 || etkinlikidtext != null || kisiidtext != null)
+            if (idtxt.Text != null || idtxt.Text.Length != 0 || etkinlikidtext.Text != null || kisiidtext.Text != null)
             {
                 if (!int.TryParse(idtxt.Text, out int id))
                 {

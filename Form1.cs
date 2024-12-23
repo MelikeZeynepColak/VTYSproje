@@ -24,79 +24,40 @@ namespace VTYSproje
         NpgsqlConnection baglanti = new NpgsqlConnection("server=localhost; port=5432; Database=proje; user ID=postgres; password=melike04");
         private void btnlistele_Click(object sender, EventArgs e)
         {
-            string sorgu = "select * from kisibilgileri order by kisiid asc";
-            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0];
-            
-            
+            try
+            {
+                string sorgu = "select * from kisibilgileri order by kisiid asc";
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                dataGridView1.DataSource = ds.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
 
         private void ekle_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(adtext.Text)||string.IsNullOrEmpty(soyadtext.Text))
+            try
             {
-                MessageBox.Show("Ad ve Soyad alanları boş bırakılamaz!","Hata",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                return;
-            }
-            baglanti.Open();
-            NpgsqlCommand komut1 = new NpgsqlCommand("insert into kisibilgileri values (nextval('kisibilgileri_kisiid_seq'),@p1,@p2,@p3,@p4,@p5,@p6,@p7)", baglanti);
-            komut1.Parameters.AddWithValue("@p1", adtext.Text);
-            komut1.Parameters.AddWithValue("@p2", soyadtext.Text);
-            komut1.Parameters.AddWithValue("@p3", epostatext.Text);
-            komut1.Parameters.AddWithValue("@p4", telefontext.Text);
-            komut1.Parameters.AddWithValue("@p5", adrestext.Text);
-            string format = "yyyy-MM-dd"; // Beklenen tarih formatı
-            if (DateTime.TryParseExact(tarihtext.Text, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
-            {
-                komut1.Parameters.AddWithValue("@p6", parsedDate); // Geçerli tarih
-            }
-            else
-            {
-                MessageBox.Show("Geçersiz tarih formatı! Lütfen 'yyyy-MM-dd' formatında bir tarih girin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; // Hata durumunda işlemi iptal ediyoruz
-            }
-
-            komut1.Parameters.AddWithValue("@p7", kategoritext.Text);
-            komut1.ExecuteNonQuery();
-            baglanti.Close();
-            MessageBox.Show("Kişi ekleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK);
-
-                // Bağlantıyı kapatıyoruz
-            if (baglanti.State == System.Data.ConnectionState.Open)
-            {
-                baglanti.Close();
-                return;
-            }
-            string sorgu = "select * from kisibilgileri order by kisiid asc";
-            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0];
-        }
-
-        private void btnguncelle_Click(object sender, EventArgs e)
-        {
-
-            if(idtext.Text!=null || idtext.Text.Length!=0)
-            {
-                
-                if(!int.TryParse(idtext.Text, out int id))
+                if (string.IsNullOrEmpty(adtext.Text) || string.IsNullOrEmpty(soyadtext.Text))
                 {
-                    MessageBox.Show("Geçersiz id girdiniz..!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ad ve Soyad alanları boş bırakılamaz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                NpgsqlCommand komut1 = new NpgsqlCommand("update kisibilgileri set ad=@p1, soyad=@p2 , eposta=@p3, telefon=@p4,adres= @p5,dogumtarihi=@p6,kategori=@p7 where kisiid=@p8", baglanti);
-
                 baglanti.Open();
-               
+                NpgsqlCommand komut1 = new NpgsqlCommand("insert into kisibilgileri values (nextval('kisibilgileri_kisiid_seq'), @p1, @p2, @p3, @p4, @p5, @p6, @p7)", baglanti);
                 komut1.Parameters.AddWithValue("@p1", adtext.Text);
                 komut1.Parameters.AddWithValue("@p2", soyadtext.Text);
                 komut1.Parameters.AddWithValue("@p3", epostatext.Text);
                 komut1.Parameters.AddWithValue("@p4", telefontext.Text);
                 komut1.Parameters.AddWithValue("@p5", adrestext.Text);
+
                 string format = "yyyy-MM-dd"; // Beklenen tarih formatı
                 if (DateTime.TryParseExact(tarihtext.Text, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
                 {
@@ -105,30 +66,81 @@ namespace VTYSproje
                 else
                 {
                     MessageBox.Show("Geçersiz tarih formatı! Lütfen 'yyyy-MM-dd' formatında bir tarih girin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return; // Hata durumunda işlemi iptal ediyoruz
+                    return;
                 }
 
                 komut1.Parameters.AddWithValue("@p7", kategoritext.Text);
-                komut1.Parameters.AddWithValue("@p8", id);
                 komut1.ExecuteNonQuery();
+                MessageBox.Show("Kişi ekleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK);
                 baglanti.Close();
-                MessageBox.Show("Kişi güncelleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK,MessageBoxIcon.Information);
 
-                // Bağlantıyı kapatıyoruz
-                if (baglanti.State == System.Data.ConnectionState.Open)
-                {
-                    baglanti.Close();
-                    return;
-                }
+                // Listeleme işlemi sonrası veri güncelleme
                 string sorgu = "select * from kisibilgileri order by kisiid asc";
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
                 dataGridView1.DataSource = ds.Tables[0];
             }
-            else 
+            catch (Exception ex)
             {
-                MessageBox.Show("Güncellemek istediğiniz kişinin id değerini giriniz..!", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnguncelle_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                if (idtext.Text != null || idtext.Text.Length != 0)
+                {
+                    if (!int.TryParse(idtext.Text, out int id))
+                    {
+                        MessageBox.Show("Geçersiz id girdiniz..!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    NpgsqlCommand komut1 = new NpgsqlCommand("update kisibilgileri set ad=@p1, soyad=@p2, eposta=@p3, telefon=@p4, adres=@p5, dogumtarihi=@p6, kategori=@p7 where kisiid=@p8", baglanti);
+
+                    baglanti.Open();
+                    komut1.Parameters.AddWithValue("@p1", adtext.Text);
+                    komut1.Parameters.AddWithValue("@p2", soyadtext.Text);
+                    komut1.Parameters.AddWithValue("@p3", epostatext.Text);
+                    komut1.Parameters.AddWithValue("@p4", telefontext.Text);
+                    komut1.Parameters.AddWithValue("@p5", adrestext.Text);
+
+                    string format = "yyyy-MM-dd"; // Beklenen tarih formatı
+                    if (DateTime.TryParseExact(tarihtext.Text, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+                    {
+                        komut1.Parameters.AddWithValue("@p6", parsedDate); // Geçerli tarih
+                    }
+                    else
+                    {
+                        MessageBox.Show("Geçersiz tarih formatı! Lütfen 'yyyy-MM-dd' formatında bir tarih girin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    komut1.Parameters.AddWithValue("@p7", kategoritext.Text);
+                    komut1.Parameters.AddWithValue("@p8", id);
+                    komut1.ExecuteNonQuery();
+                    baglanti.Close();
+                    MessageBox.Show("Kişi güncelleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Listeleme işlemi sonrası veri güncelleme
+                    string sorgu = "select * from kisibilgileri order by kisiid asc";
+                    NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+                    dataGridView1.DataSource = ds.Tables[0];
+                }
+                else
+                {
+                    MessageBox.Show("Güncellemek istediğiniz kişinin id değerini giriniz..!", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -158,26 +170,34 @@ namespace VTYSproje
 
         private void btnsil_Click(object sender, EventArgs e)
         {
-            baglanti.Open();
-            NpgsqlCommand komut2 = new NpgsqlCommand(" Delete from kisibilgileri where kisiid=@p1", baglanti);
-            if(idtext!=null)
+            try
             {
-                komut2.Parameters.AddWithValue("@p1", int.Parse(idtext.Text));
-                komut2.ExecuteNonQuery();
-                baglanti.Close();
-                MessageBox.Show("Kişi Silindi..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                string sorgu = "select * from kisibilgileri order by kisiid asc";
-                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                dataGridView1.DataSource = ds.Tables[0];
+                baglanti.Open();
+                NpgsqlCommand komut2 = new NpgsqlCommand("Delete from kisibilgileri where kisiid=@p1", baglanti);
+                if (idtext != null)
+                {
+                    komut2.Parameters.AddWithValue("@p1", int.Parse(idtext.Text));
+                    komut2.ExecuteNonQuery();
+                    baglanti.Close();
+                    MessageBox.Show("Kişi Silindi..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    // Listeleme işlemi sonrası veri güncelleme
+                    string sorgu = "select * from kisibilgileri order by kisiid asc";
+                    NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+                    dataGridView1.DataSource = ds.Tables[0];
+                }
+                else
+                {
+                    MessageBox.Show("Lütfen geçerli id giriniz", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Lütfen geçerli id giriniz", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            
 
         }
     }

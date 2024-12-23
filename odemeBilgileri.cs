@@ -21,11 +21,19 @@ namespace VTYSproje
 
         private void btnlistele_Click(object sender, EventArgs e)
         {
-            string sorgu = "select * from odemebilgileri order by odemeid asc";
-            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0];
+            try
+            {
+                string sorgu = "select * from odemebilgileri order by odemeid asc";
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                dataGridView1.DataSource = ds.Tables[0];
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

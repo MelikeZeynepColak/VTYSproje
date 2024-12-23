@@ -22,109 +22,175 @@ namespace VTYSproje
 
         private void btnlistele_Click(object sender, EventArgs e)
         {
-            string sorgu = "select * from etkinlikbilgileri order by etkinlikid asc";
-            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0];
-        }
-
-        private void eklebtn_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(tarihtext.Text) || string.IsNullOrEmpty(saattext.Text) || string.IsNullOrEmpty(salonid.Text) || string.IsNullOrEmpty(etkinlikaditxt.Text))
+            try
             {
-                MessageBox.Show(" Alanlar boş bırakılamaz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            baglanti.Open();
-            NpgsqlCommand komut1 = new NpgsqlCommand("insert into etkinlikbilgileri values (default,@p1,@p2,@p3,@p4)", baglanti);
-            komut1.Parameters.AddWithValue("@p1", etkinlikaditxt.Text);
-            komut1.Parameters.AddWithValue("@p4", int.Parse(salonid.Text));
-
-            komut1.Parameters.AddWithValue("@p3", DateTime.Parse(saattext.Text));
-
-            string format = "yyyy-MM-dd"; // Beklenen tarih formatı
-            if (DateTime.TryParseExact(tarihtext.Text, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
-            {
-                komut1.Parameters.AddWithValue("@p2", parsedDate); // Geçerli tarih
-            }
-            else
-            {
-                MessageBox.Show("Geçersiz tarih formatı! Lütfen 'yyyy-MM-dd' formatında bir tarih girin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; // Hata durumunda işlemi iptal ediyoruz
-            }
-
-
-            komut1.ExecuteNonQuery();
-            baglanti.Close();
-            MessageBox.Show("Etkinlik ekleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK);
-
-            // Bağlantıyı kapatıyoruz
-            if (baglanti.State == System.Data.ConnectionState.Open)
-            {
-                baglanti.Close();
-                return;
-            }
-            string sorgu = "select * from etkinlikbilgileri order by etkinlikid asc";
-            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0];
-        }
-
-        private void güncellebtn_Click(object sender, EventArgs e)
-        {
-            if (idtxt != null || idtxt.Text.Length != 0 || tarihtext != null || saattext != null || salonid != null||string.IsNullOrEmpty(etkinlikaditxt.Text))
-            {
-                if (!int.TryParse(idtxt.Text, out int id))
-                {
-                    MessageBox.Show("Geçersiz id girdiniz..!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                NpgsqlCommand komut1 = new NpgsqlCommand("update etkinlikbilgileri set etkinlikadi=@p5, tarih=@p1, saat=@p2,salonid=@p3 where etkinlikid=@p4", baglanti);
-
-                baglanti.Open();
-                komut1.Parameters.AddWithValue("@p1", DateTime.Parse(tarihtext.Text));
-                komut1.Parameters.AddWithValue("@p2", DateTime.Parse(saattext.Text));
-                komut1.Parameters.AddWithValue("@p3", int.Parse(salonid.Text));
-                komut1.Parameters.AddWithValue("@p5", etkinlikaditxt.Text);
-                komut1.Parameters.AddWithValue("@p4", id);
-                komut1.ExecuteNonQuery();
-                baglanti.Close();
-                MessageBox.Show("Etkinlik güncelleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 string sorgu = "select * from etkinlikbilgileri order by etkinlikid asc";
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
                 dataGridView1.DataSource = ds.Tables[0];
-
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Güncellemek istediğiniz etkinliğin etkinlik id değerini giriniz..!", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Listeleme sırasında hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
+        private void eklebtn_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(etkinlikaditxt.Text) || string.IsNullOrEmpty(tarihtext.Text) || string.IsNullOrEmpty(saattext.Text) || string.IsNullOrEmpty(salonid.Text))
+            {
+                MessageBox.Show("Tüm alanları doldurunuz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                baglanti.Open();
+                string sorgu = "insert into etkinlikbilgileri (etkinlikadi, tarih, saat, salonid) values (@p1, @p2, @p3, @p4)";
+                using (NpgsqlCommand komut = new NpgsqlCommand(sorgu, baglanti))
+                {
+                    komut.Parameters.AddWithValue("@p1", etkinlikaditxt.Text);
+
+                    if (DateTime.TryParseExact(tarihtext.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+                    {
+                        komut.Parameters.AddWithValue("@p2", parsedDate);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Geçersiz tarih formatı! Lütfen 'yyyy-MM-dd' formatında girin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    if (TimeSpan.TryParse(saattext.Text, out TimeSpan parsedTime))
+                    {
+                        komut.Parameters.AddWithValue("@p3", parsedTime);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Geçersiz saat formatı! Lütfen 'HH:mm:ss' formatında girin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    komut.Parameters.AddWithValue("@p4", int.Parse(salonid.Text));
+
+                    komut.ExecuteNonQuery();
+                }
+                MessageBox.Show("Etkinlik başarıyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnlistele.PerformClick();  // Listeyi güncellemek için butona tıklıyoruz
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ekleme sırasında hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (baglanti.State == ConnectionState.Open)
+                {
+                    baglanti.Close();
+                }
+            }
+        }
+
+        private void güncellebtn_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(idtxt.Text) || string.IsNullOrEmpty(etkinlikaditxt.Text) || string.IsNullOrEmpty(tarihtext.Text) || string.IsNullOrEmpty(saattext.Text) || string.IsNullOrEmpty(salonid.Text))
+            {
+                MessageBox.Show("Tüm alanları doldurunuz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                if (!int.TryParse(idtxt.Text, out int etkinlikId))
+                {
+                    MessageBox.Show("Geçersiz etkinlik ID girdiniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                baglanti.Open();
+                string sorgu = "update etkinlikbilgileri set etkinlikadi=@p1, tarih=@p2, saat=@p3, salonid=@p4 where etkinlikid=@p5";
+                using (NpgsqlCommand komut = new NpgsqlCommand(sorgu, baglanti))
+                {
+                    komut.Parameters.AddWithValue("@p1", etkinlikaditxt.Text);
+
+                    if (DateTime.TryParseExact(tarihtext.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+                    {
+                        komut.Parameters.AddWithValue("@p2", parsedDate);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Geçersiz tarih formatı! Lütfen 'yyyy-MM-dd' formatında girin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    if (TimeSpan.TryParse(saattext.Text, out TimeSpan parsedTime))
+                    {
+                        komut.Parameters.AddWithValue("@p3", parsedTime);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Geçersiz saat formatı! Lütfen 'HH:mm:ss' formatında girin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    komut.Parameters.AddWithValue("@p4", int.Parse(salonid.Text));
+                    komut.Parameters.AddWithValue("@p5", etkinlikId);
+
+                    komut.ExecuteNonQuery();
+                }
+                MessageBox.Show("Etkinlik başarıyla güncellendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnlistele.PerformClick();  // Listeyi güncellemek için butona tıklıyoruz
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Güncelleme sırasında hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (baglanti.State == ConnectionState.Open)
+                {
+                    baglanti.Close();
+                }
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            baglanti.Open();
-            NpgsqlCommand komut2 = new NpgsqlCommand(" Delete from etkinlikbilgileri where etkinlikid=@p1", baglanti);
-            if (idtxt != null)
+            if (string.IsNullOrEmpty(idtxt.Text))
             {
-                komut2.Parameters.AddWithValue("@p1", int.Parse(idtxt.Text));
-                komut2.ExecuteNonQuery();
-                baglanti.Close();
-                MessageBox.Show("Kişi Silindi..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                string sorgu = "select * from etkinlikbilgileri order by etkinlikid asc";
-                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                dataGridView1.DataSource = ds.Tables[0];
+                MessageBox.Show("Silmek istediğiniz etkinliğin ID'sini giriniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else
+
+            try
             {
-                MessageBox.Show("Lütfen geçerli id giriniz", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (!int.TryParse(idtxt.Text, out int etkinlikId))
+                {
+                    MessageBox.Show("Geçersiz etkinlik ID girdiniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                baglanti.Open();
+                string sorgu = "delete from etkinlikbilgileri where etkinlikid=@p1";
+                using (NpgsqlCommand komut = new NpgsqlCommand(sorgu, baglanti))
+                {
+                    komut.Parameters.AddWithValue("@p1", etkinlikId);
+                    komut.ExecuteNonQuery();
+                }
+                MessageBox.Show("Etkinlik başarıyla silindi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                btnlistele.PerformClick();  // Listeyi güncellemek için butona tıklıyoruz
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Silme sırasında hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (baglanti.State == ConnectionState.Open)
+                {
+                    baglanti.Close();
+                }
             }
         }
 

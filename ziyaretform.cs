@@ -26,42 +26,57 @@ namespace VTYSproje
 
         private void güncellebtn_Click(object sender, EventArgs e)
         {
-            if (idtxt != null || idtxt.Text.Length != 0)
+
+            try
             {
-                if (!int.TryParse(idtxt.Text, out int id))
+                if (idtxt != null || idtxt.Text.Length != 0)
                 {
-                    MessageBox.Show("Geçersiz id girdiniz..!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    if (!int.TryParse(idtxt.Text, out int id))
+                    {
+                        MessageBox.Show("Geçersiz id girdiniz..!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    NpgsqlCommand komut1 = new NpgsqlCommand("update ziyaretkayitlari set giristarihi=@p1 where ziyaretid=@p2", baglanti);
+
+                    baglanti.Open();
+                    komut1.Parameters.AddWithValue("@p1", int.Parse(giristarihitext.Text));
+                    komut1.Parameters.AddWithValue("@p2", id);
+                    komut1.ExecuteNonQuery();
+                    baglanti.Close();
+                    MessageBox.Show("Ziyaretçi güncelleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string sorgu = "select * from ziyaretkayitlari order by ziyaretid asc";
+                    NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+                    dataGridView1.DataSource = ds.Tables[0];
+
                 }
-                NpgsqlCommand komut1 = new NpgsqlCommand("update ziyaretkayitlari set giristarihi=@p1 where ziyaretid=@p2", baglanti);
+                else
+                {
+                    MessageBox.Show("Güncellemek istediğiniz ziyaretçinin ziyaret id değerini giriniz..!", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                baglanti.Open();
-                komut1.Parameters.AddWithValue("@p1", int.Parse(giristarihitext.Text));
-                komut1.Parameters.AddWithValue("@p2", id);
-                komut1.ExecuteNonQuery();
-                baglanti.Close();
-                MessageBox.Show("Ziyaretçi güncelleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                string sorgu = "select * from ziyaretkayitlari order by ziyaretid asc";
-                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                dataGridView1.DataSource = ds.Tables[0];
-
+                }
             }
-            else
+              catch (Exception ex)
             {
-                MessageBox.Show("Güncellemek istediğiniz ziyaretçinin ziyaret id değerini giriniz..!", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnlistele_Click(object sender, EventArgs e)
         {
-            string sorgu = "select * from ziyaretkayitlari order by ziyaretid asc";
-            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0];
+            try
+            {
+                string sorgu = "select * from ziyaretkayitlari order by ziyaretid asc";
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                dataGridView1.DataSource = ds.Tables[0];
+            }
+              catch (Exception ex)
+            {
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

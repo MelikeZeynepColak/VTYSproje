@@ -21,11 +21,18 @@ namespace VTYSproje
 
         private void btnlistele_Click(object sender, EventArgs e)
         {
-            string sorgu = "select * from egitmenbilgileri";
-            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0];
+            try
+            {
+                string sorgu = "select * from egitmenbilgileri";
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                dataGridView1.DataSource = ds.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Listeleme sırasında bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -35,32 +42,45 @@ namespace VTYSproje
 
         private void güncellebtn_Click(object sender, EventArgs e)
         {
-            if (idtxt != null || idtxt.Text.Length != 0)
+            if (string.IsNullOrEmpty(idtxt.Text) || string.IsNullOrEmpty(uzmantxt.Text))
             {
-                if (!int.TryParse(idtxt.Text, out int id))
-                {
-                    MessageBox.Show("Geçersiz id girdiniz..!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                NpgsqlCommand komut1 = new NpgsqlCommand("update egitmenbilgileri set uzmanlikalani=@p1 where egitmenid=@p2", baglanti);
-
-                baglanti.Open();
-                komut1.Parameters.AddWithValue("@p1", uzmantxt.Text);
-                komut1.Parameters.AddWithValue("@p2", id);
-                komut1.ExecuteNonQuery();
-                baglanti.Close();
-                MessageBox.Show("Kişi güncelleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                string sorgu = "select * from egitmenbilgileri";
-                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                dataGridView1.DataSource = ds.Tables[0];
-
+                MessageBox.Show("Tüm alanları doldurun!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else
-            {
-                MessageBox.Show("Güncellemek istediğiniz eğitmenin eğitmen id değerini giriniz..!", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+            if (!int.TryParse(idtxt.Text, out int id))
+            {
+                MessageBox.Show("Geçersiz eğitmen ID girdiniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                baglanti.Open();
+                string sorgu = "update egitmenbilgileri set uzmanlikalani=@p1 where egitmenid=@p2";
+
+                using (NpgsqlCommand komut = new NpgsqlCommand(sorgu, baglanti))
+                {
+                    komut.Parameters.AddWithValue("@p1", uzmantxt.Text);
+                    komut.Parameters.AddWithValue("@p2", id);
+                    komut.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Eğitmen bilgisi güncellendi.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Listeyi yenile
+                btnlistele_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Güncelleme sırasında bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (baglanti.State == ConnectionState.Open)
+                {
+                    baglanti.Close();
+                }
             }
         }
     }

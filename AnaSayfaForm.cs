@@ -79,23 +79,20 @@ namespace VTYSproje
 
         private void ekipmanBilgileriToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ekipmanbilgileri ekipmanbilgileri = new ekipmanbilgileri();
+            ekipmanbilgileri.Show();
         }
 
         private void kullanımKayıtlarıToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ekipmanlarKullanim ekipmanlar = new ekipmanlarKullanim();
+            ekipmanlar.Show();
         }
 
         private void ziyaretçilerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ziyaretform ziyaret = new ziyaretform();
             ziyaret.Show();
-        }
-
-        private void toplamGelirToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

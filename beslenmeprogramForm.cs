@@ -21,41 +21,65 @@ namespace VTYSproje
 
         private void btnlistele_Click(object sender, EventArgs e)
         {
-            string sorgu = "select * from beslenmeprogramlari";
-            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0];
-        }
-
-        private void güncellebtn_Click(object sender, EventArgs e)
-        {
-            if (idtxt != null || idtxt.Text.Length != 0)
+            try
             {
-                if (!int.TryParse(idtxt.Text, out int id))
-                {
-                    MessageBox.Show("Geçersiz id girdiniz..!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                NpgsqlCommand komut1 = new NpgsqlCommand("update beslenmeprogramlari set detaylar=@p1 where programid=@p2", baglanti);
-
-                baglanti.Open();
-                komut1.Parameters.AddWithValue("@p1",detaytext.Text);
-                komut1.Parameters.AddWithValue("@p2", id);
-                komut1.ExecuteNonQuery();
-                baglanti.Close();
-                MessageBox.Show("Program güncelleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                string sorgu = "select * beslenmeprogramlari";
+                string sorgu = "select * from beslenmeprogramlari";
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
                 dataGridView1.DataSource = ds.Tables[0];
-
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Güncellemek istediğiniz programın program id değerini giriniz..!", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
+        private void güncellebtn_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(idtxt.Text) || string.IsNullOrEmpty(detaytext.Text))
+            {
+                MessageBox.Show("Alanlar boş bırakılamaz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!int.TryParse(idtxt.Text, out int id))
+            {
+                MessageBox.Show("Geçersiz id girdiniz..!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                baglanti.Open();
+
+                string sorgu = "update beslenmeprogramlari set detaylar=@p1 where programid=@p2";
+                using (NpgsqlCommand komut1 = new NpgsqlCommand(sorgu, baglanti))
+                {
+                    komut1.Parameters.AddWithValue("@p1", detaytext.Text);
+                    komut1.Parameters.AddWithValue("@p2", id);
+                    komut1.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Program güncelleme başarılı..", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Listeyi yenile
+                sorgu = "select * from beslenmeprogramlari";
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, baglanti);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                dataGridView1.DataSource = ds.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (baglanti.State == ConnectionState.Open)
+                {
+                    baglanti.Close();
+                }
             }
         }
 

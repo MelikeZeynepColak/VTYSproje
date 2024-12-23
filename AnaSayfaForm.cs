@@ -51,7 +51,8 @@ namespace VTYSproje
 
         private void grupDersleriToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            grupDersleriForm grupDersleri = new grupDersleriForm();
+            grupDersleri.Show();
         }
 
         private void etkinlikBilgileriToolStripMenuItem_Click(object sender, EventArgs e)

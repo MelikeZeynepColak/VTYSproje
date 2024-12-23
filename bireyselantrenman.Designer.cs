@@ -43,6 +43,8 @@
             this.saattext = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.egitmenid = new System.Windows.Forms.TextBox();
+            this.eklebtn = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.datagrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.baslık.SuspendLayout();
@@ -52,9 +54,9 @@
             // güncellebtn
             // 
             this.güncellebtn.BackColor = System.Drawing.Color.PaleVioletRed;
-            this.güncellebtn.Location = new System.Drawing.Point(410, 401);
+            this.güncellebtn.Location = new System.Drawing.Point(407, 425);
             this.güncellebtn.Name = "güncellebtn";
-            this.güncellebtn.Size = new System.Drawing.Size(121, 53);
+            this.güncellebtn.Size = new System.Drawing.Size(121, 41);
             this.güncellebtn.TabIndex = 85;
             this.güncellebtn.Text = "Güncelle";
             this.güncellebtn.UseVisualStyleBackColor = false;
@@ -193,11 +195,35 @@
             this.egitmenid.Size = new System.Drawing.Size(104, 22);
             this.egitmenid.TabIndex = 89;
             // 
+            // eklebtn
+            // 
+            this.eklebtn.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.eklebtn.Location = new System.Drawing.Point(407, 376);
+            this.eklebtn.Name = "eklebtn";
+            this.eklebtn.Size = new System.Drawing.Size(121, 43);
+            this.eklebtn.TabIndex = 90;
+            this.eklebtn.Text = "Ekle";
+            this.eklebtn.UseVisualStyleBackColor = false;
+            this.eklebtn.Click += new System.EventHandler(this.eklebtn_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.BurlyWood;
+            this.button2.Location = new System.Drawing.Point(407, 468);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(121, 41);
+            this.button2.TabIndex = 91;
+            this.button2.Text = "Sil";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // bireyselantrenman
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 515);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.eklebtn);
             this.Controls.Add(this.egitmenid);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.saattext);
@@ -212,6 +238,7 @@
             this.Controls.Add(this.btnlistele);
             this.Controls.Add(this.baslık);
             this.Name = "bireyselantrenman";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bireysel Antrenman Bilgileri";
             this.datagrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -240,5 +267,7 @@
         private System.Windows.Forms.TextBox saattext;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox egitmenid;
+        private System.Windows.Forms.Button eklebtn;
+        private System.Windows.Forms.Button button2;
     }
 }

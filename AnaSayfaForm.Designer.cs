@@ -43,7 +43,6 @@
             this.kampanylarVeÖdemelerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ödemeBilgileriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diğerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.şikayetVeÖnerilerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beslenmeProgramlarıToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ekimpanlarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ekipmanBilgileriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -198,20 +197,11 @@
             // diğerToolStripMenuItem
             // 
             this.diğerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.şikayetVeÖnerilerToolStripMenuItem,
             this.beslenmeProgramlarıToolStripMenuItem});
             this.diğerToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.diğerToolStripMenuItem.Name = "diğerToolStripMenuItem";
             this.diğerToolStripMenuItem.Size = new System.Drawing.Size(65, 57);
             this.diğerToolStripMenuItem.Text = "Diğer";
-            // 
-            // şikayetVeÖnerilerToolStripMenuItem
-            // 
-            this.şikayetVeÖnerilerToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
-            this.şikayetVeÖnerilerToolStripMenuItem.Name = "şikayetVeÖnerilerToolStripMenuItem";
-            this.şikayetVeÖnerilerToolStripMenuItem.Size = new System.Drawing.Size(261, 28);
-            this.şikayetVeÖnerilerToolStripMenuItem.Text = "Şikayet ve Öneriler";
-            this.şikayetVeÖnerilerToolStripMenuItem.Click += new System.EventHandler(this.şikayetVeÖnerilerToolStripMenuItem_Click);
             // 
             // beslenmeProgramlarıToolStripMenuItem
             // 
@@ -347,7 +337,6 @@
         private System.Windows.Forms.ToolStripMenuItem kampanylarVeÖdemelerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ödemeBilgileriToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem diğerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem şikayetVeÖnerilerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem beslenmeProgramlarıToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ekimpanlarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ekipmanBilgileriToolStripMenuItem;

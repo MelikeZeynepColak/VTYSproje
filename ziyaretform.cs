@@ -39,7 +39,7 @@ namespace VTYSproje
                     NpgsqlCommand komut1 = new NpgsqlCommand("update ziyaretkayitlari set giristarihi=@p1 where ziyaretid=@p2", baglanti);
 
                     baglanti.Open();
-                    komut1.Parameters.AddWithValue("@p1", int.Parse(giristarihitext.Text));
+                    komut1.Parameters.AddWithValue("@p1", DateTime.Parse(giristarihitext.Text));
                     komut1.Parameters.AddWithValue("@p2", id);
                     komut1.ExecuteNonQuery();
                     baglanti.Close();

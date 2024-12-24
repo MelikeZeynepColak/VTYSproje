@@ -72,11 +72,7 @@ namespace VTYSproje
             odemeBilgileri.Show();
         }
 
-        private void şikayetVeÖnerilerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void ekipmanBilgileriToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ekipmanbilgileri ekipmanbilgileri = new ekipmanbilgileri();

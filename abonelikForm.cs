@@ -61,7 +61,7 @@ namespace VTYSproje
                 }
 
                 baglanti.Open();
-                NpgsqlCommand komut1 = new NpgsqlCommand("update abonelikbilgileri set sure=@p1 where abonelikid=@p2", baglanti);
+                NpgsqlCommand komut1 = new NpgsqlCommand("update abonelikbilgileri set sure=@p1 where kisiid=@p2", baglanti);
                 komut1.Parameters.AddWithValue("@p1", int.Parse(suretext.Text));
                 komut1.Parameters.AddWithValue("@p2", id);
                 komut1.ExecuteNonQuery();
